@@ -3,7 +3,15 @@
 <head>
   <script src="https://cdn.jsdelivr.net/npm/transliteration@2.1.8/dist/browser/bundle.umd.min.js"></script>
   <style>
-    #nautical {
+    body {
+	width:100%;
+
+}
+textarea {
+	width:90%;
+	height:50%;
+}
+#nautical {
   font-size: 30px;
   font-family: monospace;
 }
@@ -13,20 +21,24 @@ label {
 }
 
 #nautical img.lower {
-  width: 30px;
+	border:1px solid gray;
+	margin:1px;
+  width: 2%;
 }
 
 #nautical img.upper {
-  width: 40px;
+	border:1px solid gray;
+	margin:1px;
+  width: 2.5%;
 }
 </style>
 </head>
 
 <body>
-  <h1>Naufabet (verzia 1.0.1)</h1>
+  <h1>Naufabet (verzia 1.0.2, layout)</h1>
   <h2>Human</h2>
   <label for="human">Sem zacnite pisat, zatial bez diakritiky:</label>
-  <textarea id="human" rows=20 cols=40 WRAP="HARD"></textarea>
+  <textarea id="human"></textarea>
   <!--<button id="convert">convert</button>-->
   <label>bez diakritiky<input type=checkbox id="translit" checked disabled></label>
   <label>debil mode<input type=checkbox id="debilMode"></label>
