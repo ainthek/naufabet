@@ -1,13 +1,18 @@
 <html>
-<style>
-  #nautical {
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/transliteration@2.1.8/dist/browser/bundle.umd.min.js"></script>
+  <style>
+    #nautical {
   font-size: 30px;
   font-family: monospace;
 }
+
 label {
-	display:block;
+  display: block;
 }
-#nautical img.lower { 
+
+#nautical img.lower {
   width: 30px;
 }
 
@@ -15,14 +20,16 @@ label {
   width: 40px;
 }
 </style>
+</head>
 
 <body>
-  <h1>Naufabet (verzia 1.0.0)</h1>
+  <h1>Naufabet (verzia 1.0.1)</h1>
   <h2>Human</h2>
   <label for="human">Sem zacnite pisat, zatial bez diakritiky:</label>
-  <textarea id="human" rows=20 cols=80></textarea>
+  <textarea id="human" rows=20 cols=40 WRAP="HARD"></textarea>
   <!--<button id="convert">convert</button>-->
-  <label>debil mode<input type=checkbox value="debilMode" id="debilMode"></label>
+  <label>bez diakritiky<input type=checkbox id="translit" checked disabled></label>
+  <label>debil mode<input type=checkbox id="debilMode"></label>
   <h3>Nautical</h3>
   <pre id="nautical">
 
@@ -43,12 +50,18 @@ label {
 
   function go() {
     const debilMode = document.getElementById("debilMode").checked;
+    const translit = document.getElementById("translit").checked;
     const folder = debilMode ? "img-orig" : "img";
     const ext = debilMode ? "gif" : "png";
     const nautical = document.getElementById("nautical");
     nautical.innerHTML = "";
 
-    const human = document.getElementById("human").value;
+    let human = document.getElementById("human").value;
+
+    if (translit) {
+      human = human.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    }
+    human = wordWrap(human, 40); //TODO: =based on cols
     const letters = [...human];
     const images = letters.map(l => {
       if (l.match(/[a-z]/)) {
@@ -61,6 +74,39 @@ label {
 
     })
     nautical.innerHTML = images.join("");
+
+
+    function wordWrap(str, maxWidth) {
+      //https://stackoverflow.com/questions/14484787/wrap-text-in-javascript
+      var newLineStr = "\n";
+      done = false;
+      res = '';
+      while (str.length > maxWidth) {
+        found = false;
+        // Inserts new line at first whitespace of the line
+        for (i = maxWidth - 1; i >= 0; i--) {
+          if (testWhite(str.charAt(i))) {
+            res = res + [str.slice(0, i), newLineStr].join('');
+            str = str.slice(i + 1);
+            found = true;
+            break;
+          }
+        }
+        // Inserts new line at maxWidth position, the word is too long to wrap
+        if (!found) {
+          res += [str.slice(0, maxWidth), newLineStr].join('');
+          str = str.slice(maxWidth);
+        }
+
+      }
+
+      return res + str;
+
+      function testWhite(x) {
+        var white = new RegExp(/^\s$/);
+        return white.test(x.charAt(0));
+      };
+    }
   };
   </script>
 </body>
