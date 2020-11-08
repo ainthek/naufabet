@@ -1,6 +1,7 @@
 <html lang="sk">
 
 <head>
+  <meta charset="UTF-8">
   <script src="https://cdn.jsdelivr.net/npm/transliteration@2.1.8/dist/browser/bundle.umd.min.js"></script>
   <style>
     body {
@@ -41,7 +42,10 @@ img.expert {
 <body>
   <h1>Naufabet (verzia 1.3.1, expert mode)</h1>
   <label for="human">Human</label>
-  <textarea id="human" placeholder="Sem začnite pisat, alebo skpírujte text">Ahojte</textarea>
+  <textarea id="human" placeholder="Sem začnite písat, alebo skopírujte text">
+Sem začnite písat, 
+alebo skopírujte text
+</textarea>
   <!--<button id="convert">convert</button>-->
   <label>bez diakritiky<input type=checkbox id="translit" checked disabled></label>
   <label>expert mode<input type=checkbox id="expert"></label>
@@ -69,7 +73,7 @@ img.expert {
   function go() {
     const debilMode = document.getElementById("debilMode").checked;
     const translit = document.getElementById("translit").checked;
-    const expert = document.getElementById("expert").checked?"expert":"";
+    const expert = document.getElementById("expert").checked ? "expert" : "";
 
     const folder = debilMode ? "img-orig" : "img";
     const ext = debilMode ? "gif" : "png";
@@ -131,7 +135,4 @@ img.expert {
   go();
   </script>
   <hr>
-  see also: <a href=https://www.dcode.fr/maritime-signals-code>https://www.dcode.fr/maritime-signals-code</a>a
-</body>
-
-</html>
+  see also: <a href=https://www.dcode.fr/maritime-signals-code>https://www.dcode.fr/maritime-signals-code </a>a </body> </html>
