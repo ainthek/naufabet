@@ -31,16 +31,20 @@ label {
 	margin:1px;
   width: 2.5%;
 }
+img.expert {
+	filter: grayscale(100%);
+}
 </style>
 </head>
 
 <body>
-  <h1>Naufabet (verzia 1.2.1, layout)</h1>
+  <h1>Naufabet (verzia 1.3.0, expert mode)</h1>
   <h2>Human</h2>
   <label for="human">Sem zacnite pisat, alebo skpirujte text:</label>
   <textarea id="human"></textarea>
   <!--<button id="convert">convert</button>-->
   <label>bez diakritiky<input type=checkbox id="translit" checked disabled></label>
+  <label>expert mode<input type=checkbox id="expert"></label>
   <label>debil mode<input type=checkbox id="debilMode"></label>
   <h3>Nautical</h3>
   <pre id="nautical">
@@ -57,12 +61,15 @@ label {
   //document.getElementById("convert").onclick = go;
   document.getElementById("human").oninput = go;
   document.getElementById("debilMode").onchange = go;
+  document.getElementById("expert").onchange = go;
   // document.getElementById("human").onkeyup = go
   // document.getElementById("human").onkeypress = go
 
   function go() {
     const debilMode = document.getElementById("debilMode").checked;
     const translit = document.getElementById("translit").checked;
+    const expert = document.getElementById("expert").checked?"expert":"";
+
     const folder = debilMode ? "img-orig" : "img";
     const ext = debilMode ? "gif" : "png";
     const nautical = document.getElementById("nautical");
@@ -77,9 +84,9 @@ label {
     const letters = [...human];
     const images = letters.map(l => {
       if (l.match(/[a-z]/)) {
-        return `<img src="${folder}/${l.toUpperCase()}.${ext}" class="lower">`
+        return `<img src="${folder}/${l.toUpperCase()}.${ext}" class="lower ${expert}">`
       } else if (l.match(/[A-Z]/)) {
-        return `<img src="${folder}/${l.toUpperCase()}.${ext}" class="upper">`
+        return `<img src="${folder}/${l.toUpperCase()}.${ext}" class="upper ${expert}">`
       } else {
         return l;
       }
