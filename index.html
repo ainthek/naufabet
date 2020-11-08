@@ -1,0 +1,60 @@
+<html>
+<style>
+#nautical {
+  font-size: 30px;
+  font-family: monospace;
+}
+
+#nautical img.lower {
+  height: 30px;
+  width: 30px;
+}
+
+#nautical img.upper {
+  height: 40px;
+  width: 40px;
+}
+</style>
+
+<body>
+  <h1>Naufabet</h1>
+  <h2>Human<h2>
+      <textarea id="human" rows=20 cols=80></textarea>
+      <!--<button id="convert">convert</button>-->
+      <h3>Nautical</h3>
+      <label>debil mode<input type=checkbox value="debilMode" id="debilMode"></label>
+      <pre id="nautical">
+
+      </pre>
+      <script>
+      //document.getElementById("convert").onclick = go;
+      document.getElementById("human").oninput = go;
+      document.getElementById("debilMode").onchange = go;
+      // document.getElementById("human").onkeyup = go
+      // document.getElementById("human").onkeypress = go
+
+      function go() {
+      	const debilMode=document.getElementById("debilMode").checked;
+      	const folder=debilMode?"img-orig":"img";
+      	const ext=debilMode?"gif":"png";
+        const nautical = document.getElementById("nautical");
+        nautical.innerHTML = "";
+
+        const human = document.getElementById("human").value;
+        const letters = [...human];
+        const images = letters.map(l => {
+          if (l.match(/[a-z]/)) {
+            return `<img src="${folder}/${l.toUpperCase()}.${ext}" class="lower">`
+          } else if (l.match(/[A-Z]/)) {
+            return `<img src="${folder}/${l.toUpperCase()}.${ext}" class="upper">`
+          } else {
+            return l;
+          }
+
+        })
+        nautical.innerHTML = images.join("");
+      };
+      </script>
+</body>
+
+</html>
