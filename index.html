@@ -10,26 +10,27 @@
 textarea {
 	width:90%;
 	height:30%;
+	display:block;
 }
 #nautical {
   font-size: 30px;
   font-family: monospace;
 }
 
-label {
+/*label {
   display: block;
 }
-
+*/
 #nautical img.lower {
 	border:1px solid gray;
 	margin:1px;
-  width: 2%;
+  width: 3%;
 }
 
 #nautical img.upper {
 	border:1px solid gray;
 	margin:1px;
-  width: 2.5%;
+  width: 4%;
 }
 img.expert {
 	filter: grayscale(100%);
@@ -39,14 +40,14 @@ img.expert {
 
 <body>
   <h1>Naufabet (verzia 1.3.0, expert mode)</h1>
-  <h2>Human</h2>
-  <label for="human">Sem zacnite pisat, alebo skpirujte text:</label>
-  <textarea id="human"></textarea>
+  <label for="human">Human</label>
+  <textarea id="human" placeholder="Sem zacnite pisat, alebo skpirujte text">abcd</textarea>
   <!--<button id="convert">convert</button>-->
   <label>bez diakritiky<input type=checkbox id="translit" checked disabled></label>
   <label>expert mode<input type=checkbox id="expert"></label>
   <label>debil mode<input type=checkbox id="debilMode"></label>
-  <h3>Nautical</h3>
+  <hr>
+  <label for="nautical">Nautical</label>
   <pre id="nautical">
 
       </pre>
@@ -127,7 +128,10 @@ img.expert {
       };
     }
   };
+  go();
   </script>
+  <hr>
+  see also: <a href=https://www.dcode.fr/maritime-signals-code>https://www.dcode.fr/maritime-signals-code</a>a
 </body>
 
 </html>
